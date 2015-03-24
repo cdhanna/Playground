@@ -17,16 +17,16 @@ public class Sandbox {
 		
 		Agent a = new Agent("AgentA");
 		
-		a.getBrain().addThought(new IntChangerListenerThought(2));
+		a.getBrain().addThought(new IntAvgThought(2));
 		
 		System.out.println("giveInput");
-		a.giveInput(new IntIO(30));
-		a.giveInput(new IntIO(0));
 		a.giveInput(new IntIO(15));
 		a.giveInput(new IntIO(15));
 		a.giveInput(new IntIO(15));
 		a.giveInput(new IntIO(19));
-		a.giveInput(new IntIO(20));
+		a.giveInput(new IntIO(14));
+		a.giveInput(new IntIO(16));
+		
 		
 		System.out.println("thinking...");
 		a.think();

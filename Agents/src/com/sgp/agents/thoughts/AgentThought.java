@@ -4,6 +4,7 @@ import com.sgp.agents.io.AgentIO;
 
 public interface AgentThought {
 
-	public AgentIO thinkOn(AgentIO input);
-	
+	public void prepare();
+	public void addIO(AgentIO input);
+	public AgentIO think();
 }

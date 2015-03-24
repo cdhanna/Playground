@@ -11,17 +11,23 @@ public class AgentBrain extends AgentThoughtsCollection{
 
 		AgentIOCollection outputs = new AgentIOCollection();
 
-		for (AgentIO input : inputs.getAll()){
-			for (AgentThought thought : super.getThoughts()){
-				AgentIO output = (thought.thinkOn(input));
-				if (output != null && output.getData() != null){
-					
-					ReflectedAgentIO refOutput = new ReflectedAgentIO(agent.getID(), output);
-					outputs.addAgentIO(refOutput);
-					
-				}
+		//stage one, give all input to every thought. 
+		for (AgentThought thought : super.getThoughts()){
+			thought.prepare();
+			for (AgentIO input : inputs.getAll()){
+				thought.addIO(input);
 			}
 		}
+		
+		//stage two, assemble output from all thoughts.
+		for (AgentThought thought : super.getThoughts()){
+			AgentIO output = thought.think();
+			if (output != null && output.getData() != null){
+				ReflectedAgentIO refOutput = new ReflectedAgentIO(agent.getID(), output);
+				outputs.addAgentIO(refOutput);
+			}
+		}
+		
 
 
 		return outputs;
