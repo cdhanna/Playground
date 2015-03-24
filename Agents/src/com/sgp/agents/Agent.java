@@ -10,16 +10,14 @@ public class Agent {
 	
 	private AgentBrain brain;
 	private String id;
-	private AgentIOCollection currentInput;
-	private AgentIOCollection currentOutput;
+
 	
 	
 	
 	public Agent(String id){
 		this.id = id;
-		this.brain = new AgentBrain();
-		this.currentInput = new AgentIOCollection();
-		this.currentOutput = new AgentIOCollection();
+		this.brain = new AgentBrain(this);
+
 	}
 	
 	public AgentBrain getBrain(){
@@ -29,21 +27,6 @@ public class Agent {
 		return this.id;
 	}
 	
-	public void reset(){
-		this.currentInput.clear();
-		this.currentOutput.clear();
-	}
-	
-	public void giveInput(AgentIO input){
-		this.currentInput.addAgentIO(input);
-	}
-	
-	public void think(){
-		this.currentOutput = this.brain.thinkOn(this, this.currentInput);
-	}
-	
-	public AgentIOCollection getOutput(){
-		return this.currentOutput;
-	}
+
 	
 }

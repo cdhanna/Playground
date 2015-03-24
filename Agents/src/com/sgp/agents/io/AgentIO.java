@@ -26,6 +26,10 @@ public class AgentIO {
 		return this.getClass();
 	}
 	
+	public AgentIO getSelf(){
+		return this;
+	}
+	
 	@Override
 	public String toString(){
 		return "[AgentIO: (" + getIOClass().getSimpleName()+") ORIGIN=" +getOrigin() + ", DATA=" + getData() + "]";

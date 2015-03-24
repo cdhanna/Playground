@@ -22,5 +22,9 @@ public class ReflectedAgentIO extends AgentIO{
 		return this.original.getClass();
 	}
 	
+	@Override
+	public AgentIO getSelf(){
+		return this.original;
+	}
 	
 }
