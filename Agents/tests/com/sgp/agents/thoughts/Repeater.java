@@ -2,6 +2,7 @@ package com.sgp.agents.thoughts;
 
 import com.sgp.agents.Agent;
 import com.sgp.agents.io.AgentMessage;
+import com.sgp.agents.io.AgentMessageCollection.AgentMessageMatcher;
 import com.sgp.agents.io.UntypedAgentMessageCollection;
 
 public class Repeater extends CommonAgentThought{
