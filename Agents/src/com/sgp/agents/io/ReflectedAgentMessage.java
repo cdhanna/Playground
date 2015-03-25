@@ -1,11 +1,15 @@
 package com.sgp.agents.io;
 
-public class ReflectedAgentIO extends AgentIO{
+/**
+ * @author cdhan_000
+ * The ReflectedAgentMessage
+ */
+public class ReflectedAgentMessage extends AgentMessage{
 
-	private AgentIO original;
+	private AgentMessage original;
 	private String origin;
 	
-	public ReflectedAgentIO(String origin, AgentIO original){
+	public ReflectedAgentMessage(String origin, AgentMessage original){
 		super(original.getData());
 		this.original = original;
 		this.origin = origin;
@@ -18,12 +22,12 @@ public class ReflectedAgentIO extends AgentIO{
 	}
 	
 	@Override
-	public Class<?> getIOClass(){
+	public Class<?> getMessageClass(){
 		return this.original.getClass();
 	}
 	
 	@Override
-	public AgentIO getSelf(){
+	public AgentMessage getSelf(){
 		return this.original;
 	}
 	

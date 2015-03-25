@@ -1,10 +1,10 @@
 package com.sgp.agents.io;
 
-public class TypedAgentIO<T> extends AgentIO{
+public class TypedAgentMessage<T> extends AgentMessage{
 	
 	private T typedData;
 	
-	public TypedAgentIO(T data){
+	public TypedAgentMessage(T data){
 		super(data);
 		this.typedData = data;
 	}

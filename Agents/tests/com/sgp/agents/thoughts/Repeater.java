@@ -1,8 +1,8 @@
 package com.sgp.agents.thoughts;
 
 import com.sgp.agents.Agent;
-import com.sgp.agents.io.AgentIO;
-import com.sgp.agents.io.UntypedAgentIOCollection;
+import com.sgp.agents.io.AgentMessage;
+import com.sgp.agents.io.UntypedAgentMessageCollection;
 
 public class Repeater extends CommonAgentThought{
 
@@ -14,17 +14,17 @@ public class Repeater extends CommonAgentThought{
 	}
 	
 	@Override
-	public void onIOAdded(AgentIO input) {
+	public void onIOAdded(AgentMessage input) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public UntypedAgentIOCollection think() {
+	public UntypedAgentMessageCollection think() {
 		
-		UntypedAgentIOCollection ios = this.getInputs(new AgentIOMatcher(){
+		UntypedAgentMessageCollection ios = this.getInputs(new AgentIOMatcher(){
 			@Override
-			public boolean is(AgentIO io) {
+			public boolean is(AgentMessage io) {
 				return io.getOrigin().equals(repeatIt.getID());
 			}});
 		

@@ -1,9 +1,9 @@
 package com.sgp.agents;
 
-import com.sgp.agents.io.AgentIO;
-import com.sgp.agents.io.AgentIOCollection;
-import com.sgp.agents.io.TypedAgentIO;
-import com.sgp.agents.io.UntypedAgentIOCollection;
+import com.sgp.agents.io.AgentMessage;
+import com.sgp.agents.io.AgentMessageCollection;
+import com.sgp.agents.io.TypedAgentMessage;
+import com.sgp.agents.io.UntypedAgentMessageCollection;
 import com.sgp.agents.io.common.IntIO;
 import com.sgp.agents.thoughts.AgentThought;
 import com.sgp.agents.thoughts.IntDoubler;
@@ -25,7 +25,7 @@ public class Sandbox {
 		c.addAgent(gentA);
 		c.addAgent(gentB);
 		
-		UntypedAgentIOCollection outputs = new UntypedAgentIOCollection();
+		UntypedAgentMessageCollection outputs = new UntypedAgentMessageCollection();
 		
 		outputs.addAgentIO(new IntIO(5));
 		
@@ -34,7 +34,7 @@ public class Sandbox {
 			System.out.println("SIM ROUND : " + i);
 			outputs = c.run(outputs);
 			
-			for (AgentIO io : outputs.getAll()){
+			for (AgentMessage io : outputs.getAll()){
 				System.out.println(io);
 			}
 		}

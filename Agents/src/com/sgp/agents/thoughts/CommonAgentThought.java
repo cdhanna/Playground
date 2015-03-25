@@ -1,27 +1,31 @@
 package com.sgp.agents.thoughts;
 
-import com.sgp.agents.io.AgentIO;
-import com.sgp.agents.io.AgentIOCollection;
-import com.sgp.agents.io.UntypedAgentIOCollection;
+import com.sgp.agents.io.AgentMessage;
+import com.sgp.agents.io.AgentMessageCollection;
+import com.sgp.agents.io.UntypedAgentMessageCollection;
 
+/**
+ * @author cdhan_000
+ * A default implementation for AgentThought.
+ */
 public abstract class CommonAgentThought implements AgentThought{
 
 	public interface AgentIOMatcher {
-		boolean is(AgentIO io);
+		boolean is(AgentMessage io);
 	}
 	
-	private UntypedAgentIOCollection inputs;
+	private UntypedAgentMessageCollection inputs;
 	
 	public CommonAgentThought(){
-		this.inputs = new UntypedAgentIOCollection();
+		this.inputs = new UntypedAgentMessageCollection();
 	}
 	
-	public UntypedAgentIOCollection getInputCollection(){
+	public UntypedAgentMessageCollection getInputCollection(){
 		return this.inputs;
 	}
 	
 	@Override
-	public void addIO(AgentIO input) {
+	public void addMessage(AgentMessage input) {
 		this.inputs.addAgentIO(input);
 		onIOAdded(input);
 	}
@@ -32,9 +36,9 @@ public abstract class CommonAgentThought implements AgentThought{
 	}
 
 	
-	public UntypedAgentIOCollection getInputs(AgentIOMatcher m){
-		UntypedAgentIOCollection ios = new UntypedAgentIOCollection();
-		for (AgentIO io : this.getInputCollection().getAll()){
+	public UntypedAgentMessageCollection getInputs(AgentIOMatcher m){
+		UntypedAgentMessageCollection ios = new UntypedAgentMessageCollection();
+		for (AgentMessage io : this.getInputCollection().getAll()){
 			if (m.is(io)){
 				ios.addAgentIO(io.getSelf());
 			}
@@ -42,11 +46,11 @@ public abstract class CommonAgentThought implements AgentThought{
 		return ios;
 	}
 	
-	public <T extends AgentIO> AgentIOCollection<T> getInputs(Class<? extends T> clazz){
+	public <T extends AgentMessage> AgentMessageCollection<T> getInputs(Class<? extends T> clazz){
 		
-		AgentIOCollection<T> ios = new AgentIOCollection<T>();
-		for (AgentIO io : this.getInputCollection().getAll()){
-			if (io.getIOClass().isAssignableFrom(clazz)){
+		AgentMessageCollection<T> ios = new AgentMessageCollection<T>();
+		for (AgentMessage io : this.getInputCollection().getAll()){
+			if (io.getMessageClass().isAssignableFrom(clazz)){
 				ios.addAgentIO((T)io.getSelf());
 			}
 		}
@@ -54,8 +58,8 @@ public abstract class CommonAgentThought implements AgentThought{
 		
 	}
 	
-	public abstract void onIOAdded(AgentIO input);
+	public abstract void onIOAdded(AgentMessage input);
 	
 	@Override
-	public abstract UntypedAgentIOCollection think();
+	public abstract UntypedAgentMessageCollection think();
 }

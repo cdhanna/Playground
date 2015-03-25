@@ -1,19 +1,19 @@
 package com.sgp.agents.thoughts;
 
-import com.sgp.agents.io.AgentIO;
-import com.sgp.agents.io.UntypedAgentIOCollection;
+import com.sgp.agents.io.AgentMessage;
+import com.sgp.agents.io.UntypedAgentMessageCollection;
 import com.sgp.agents.io.common.IntIO;
 
 public class IntDoubler extends CommonAgentThought{
 
 	@Override
-	public void onIOAdded(AgentIO input) {
+	public void onIOAdded(AgentMessage input) {
 	}
 
 	@Override
-	public UntypedAgentIOCollection think() {
+	public UntypedAgentMessageCollection think() {
 		
-		UntypedAgentIOCollection c = new UntypedAgentIOCollection();
+		UntypedAgentMessageCollection c = new UntypedAgentMessageCollection();
 		
 		for (IntIO io : this.getInputs(IntIO.class).getAll()){
 			c.addAgentIO(new IntIO( io.getData() * 2));
