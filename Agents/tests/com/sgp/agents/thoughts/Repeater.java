@@ -22,7 +22,7 @@ public class Repeater extends CommonAgentThought{
 	@Override
 	public UntypedAgentMessageCollection think() {
 		
-		UntypedAgentMessageCollection ios = this.getInputs(new AgentIOMatcher(){
+		UntypedAgentMessageCollection ios = this.getInputs(new AgentMessageMatcher(){
 			@Override
 			public boolean is(AgentMessage io) {
 				return io.getOrigin().equals(repeatIt.getID());

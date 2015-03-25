@@ -3,6 +3,7 @@ package com.sgp.agents.io;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * @author cdhan_000
  * The AgentMessageCollection is an abstraction for a collection of AgentMessages. 
@@ -13,6 +14,11 @@ import java.util.List;
  */
 public class AgentMessageCollection<T extends AgentMessage> {
 
+	
+	public interface AgentMessageMatcher {
+		boolean is(AgentMessage io);
+	}
+	
 	private List<T> io;
 	
 	public AgentMessageCollection(){
@@ -45,6 +51,24 @@ public class AgentMessageCollection<T extends AgentMessage> {
 		this.io.clear();
 	}
 	
+	/**
+	 * Filters inputs based on a matcher function;
+	 * @param m some matcher implementation
+	 * @return A collection of messages that meets the critea specified in the matcher.
+	 */
+	public AgentMessageCollection<T> getInputs(AgentMessageMatcher m){
+		AgentMessageCollection<T> ios = new AgentMessageCollection<T>();
+		for (T io : this.getAll()){
+			if (m.is(io)){
+				ios.addAgentIO((T)io.getSelf());
+			}
+		}
+		return ios;
+	}
+
 	
+	public UntypedAgentMessageCollection asUntyped(){
+		return new UntypedAgentMessageCollection(this);
+	}
 	
 }

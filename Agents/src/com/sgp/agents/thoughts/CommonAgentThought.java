@@ -2,6 +2,7 @@ package com.sgp.agents.thoughts;
 
 import com.sgp.agents.io.AgentMessage;
 import com.sgp.agents.io.AgentMessageCollection;
+import com.sgp.agents.io.AgentMessageCollection.AgentMessageMatcher;
 import com.sgp.agents.io.UntypedAgentMessageCollection;
 
 /**
@@ -10,9 +11,7 @@ import com.sgp.agents.io.UntypedAgentMessageCollection;
  */
 public abstract class CommonAgentThought implements AgentThought{
 
-	public interface AgentIOMatcher {
-		boolean is(AgentMessage io);
-	}
+
 	
 	private UntypedAgentMessageCollection inputs;
 	
@@ -36,26 +35,12 @@ public abstract class CommonAgentThought implements AgentThought{
 	}
 
 	
-	public UntypedAgentMessageCollection getInputs(AgentIOMatcher m){
-		UntypedAgentMessageCollection ios = new UntypedAgentMessageCollection();
-		for (AgentMessage io : this.getInputCollection().getAll()){
-			if (m.is(io)){
-				ios.addAgentIO(io.getSelf());
-			}
-		}
-		return ios;
+	public UntypedAgentMessageCollection getInputs(AgentMessageMatcher m){
+		return this.getInputCollection().getInputs(m).asUntyped();
 	}
 	
 	public <T extends AgentMessage> AgentMessageCollection<T> getInputs(Class<? extends T> clazz){
-		
-		AgentMessageCollection<T> ios = new AgentMessageCollection<T>();
-		for (AgentMessage io : this.getInputCollection().getAll()){
-			if (io.getMessageClass().isAssignableFrom(clazz)){
-				ios.addAgentIO((T)io.getSelf());
-			}
-		}
-		return ios;
-		
+		return this.getInputCollection().getInputs(clazz);
 	}
 	
 	public abstract void onIOAdded(AgentMessage input);

@@ -2,7 +2,9 @@ package com.sgp.agents.io;
 
 /**
  * @author cdhan_000
- * The ReflectedAgentMessage
+ * The ReflectedAgentMessage is used for repurposing Messages. It follows the decorater pattern.
+ * Essentially, it pretends to be a different AgentMessage. 
+ * This is useful when the Agent backend is setting the origin of messages, internally. 
  */
 public class ReflectedAgentMessage extends AgentMessage{
 
