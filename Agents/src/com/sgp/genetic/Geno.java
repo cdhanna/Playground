@@ -1,9 +1,14 @@
 package com.sgp.genetic;
 
-public interface Geno<T extends Geno> {
+public interface Geno<T extends Geno<T>> {
 
+	
 	void mutate(float amount);
-	float getRank();
-	T birth(T mate);
+	
+	T reproduce(T mate);
+	
+	T replicate();
+	
+	String display();
 	
 }
